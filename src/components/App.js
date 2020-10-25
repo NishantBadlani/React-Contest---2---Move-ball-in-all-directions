@@ -11,39 +11,38 @@ const App = () => {
   });
 
   useEffect(() => {
-    const changePosition = (event) => {
-      // console.log(event.keyCode);
-      // console.log(ballPosition);
+    function changePosition(event) {
+      // console.log("Executed");
+      let currentLeft = +ballPosition.left.substr(0, ballPosition.left.length - 2);
+      let currentTop = +ballPosition.top.substr(0, ballPosition.top.length - 2);
+
       if (event.keyCode === 37) {
-        setX(x - 5);
+        currentLeft -= 5;
       } else if (event.keyCode === 38) {
-        setY(y - 5);
+        currentTop -= 5;
       } else if (event.keyCode === 39) {
-        setX(x + 5);
+        currentLeft += 5;
       } else if (event.keyCode === 40) {
-        setY(y + 5);
+        currentTop += 5;
       }
       setBallPosition({
-        left: `${x}px`,
-        top: `${y}px`
+        left: `${currentLeft}px`,
+        top: `${currentTop}px`
       });
-      // console.log(x, y);
-      // console.log(ballPosition);
-    };
+      // console.log(currentLeft, currentTop);
+    }
 
     document.addEventListener("keydown", changePosition);
-    // console.log("Created");
 
     return () => {
-      // console.log("Cleaned up");
       document.removeEventListener("keydown", changePosition);
     };
-  }, [x, y, ballPosition]);
+  }, [ballPosition]);
 
   const reset = () => {
     setRenderBall(false);
-    setX(0);
-    setY(0);
+    // setX(0);
+    // setY(0);
     setBallPosition({
       left: "0px",
       top: "0px"
