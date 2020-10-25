@@ -32,13 +32,13 @@ const App = () => {
     };
 
     document.addEventListener("keydown", changePosition);
-    console.log("Created");
+    // console.log("Created");
 
     return () => {
-      console.log("Cleaned up");
+      // console.log("Cleaned up");
       document.removeEventListener("keydown", changePosition);
     };
-  }, [ballPosition]);
+  }, [x, y, ballPosition]);
 
   const reset = () => {
     setRenderBall(false);
