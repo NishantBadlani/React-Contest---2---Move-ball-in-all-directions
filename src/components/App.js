@@ -11,7 +11,9 @@ const App = () => {
   });
 
   useEffect(() => {
-    document.addEventListener("keydown", (event) => {
+    const changePosition = (event) => {
+      // console.log(event.keyCode);
+      // console.log(ballPosition);
       if (event.keyCode === 37) {
         setX(x - 5);
       } else if (event.keyCode === 38) {
@@ -25,8 +27,18 @@ const App = () => {
         left: `${x}px`,
         top: `${y}px`
       });
-    });
-  });
+      // console.log(x, y);
+      // console.log(ballPosition);
+    };
+
+    document.addEventListener("keydown", changePosition);
+    console.log("Created");
+
+    return () => {
+      console.log("Cleaned up");
+      document.removeEventListener("keydown", changePosition);
+    };
+  }, [ballPosition]);
 
   const reset = () => {
     setRenderBall(false);
@@ -45,7 +57,12 @@ const App = () => {
   const renderChoice = () => {
     if (renderBall) {
       return <div className="ball" style={ballPosition}></div>;
-    } else return <button onClick={buttonClickHandler}>Click For One Ball</button>;
+    } else
+      return (
+        <button className="start" onClick={buttonClickHandler}>
+          Start
+        </button>
+      );
   };
 
   return (
